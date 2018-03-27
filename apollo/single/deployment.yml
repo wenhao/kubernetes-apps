@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: apollo
+  labels:
+    app: apollo
+spec:
+  selector:
+    matchLabels:
+      app: apollo
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: apollo
+    spec:
+      containers:
+        - image: apollo-standalone:v1.0.0
+          name: apollo
+          env:
+            - name: APOLLO_CONFIG_DB_URL
+              value: jdbc:mysql://mysql.apollo:3306/ApolloConfigDB?characterEncoding=utf8
+            - name: APOLLO_CONFIG_DB_USERNAME
+              value: admin
+            - name: APOLLO_CONFIG_DB_PASSWORD
+              value: password
+            - name: APOLLO_PORTAL_DB_URL
+              value: jdbc:mysql://mysql.apollo:3306/ApolloPortalDB?characterEncoding=utf8
+            - name: APOLLO_PORTAL_DB_USERNAME
+              value: admin
+            - name: APOLLO_PORTAL_DB_PASSWORD
+              value: password
+          ports:
+            - containerPort: 8070
+              name: apollo-portal
+            - containerPort: 8080
+              name: apollo-config
+            - containerPort: 8090
+              name: apollo-admin

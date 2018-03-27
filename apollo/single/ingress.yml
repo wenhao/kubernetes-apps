@@ -1,0 +1,13 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: apollo-ingress
+spec:
+  rules:
+    - host:
+      http:
+        paths:
+          - path: /
+            backend:
+              serviceName: apollo
+              servicePort: 8070
