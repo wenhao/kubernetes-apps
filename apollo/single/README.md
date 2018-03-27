@@ -13,7 +13,16 @@
   apollo_portal_db_username=$APOLLO_PORTAL_DB_USERNAME
   apollo_portal_db_password=$APOLLO_PORTAL_DB_PASSWORD
   ```
-3. docker build -t apollo-standalone:v1.0.0 .  
+3. modify dockerfile.
+  ```
+  ENV APOLLO_CONFIG_DB_URL=${APOLLO_CONFIG_DB_URL:-jdbc:mysql://localhost:3306/ApolloConfigDB?characterEncoding=utf8} \
+      APOLLO_CONFIG_DB_USERNAME=root \
+      APOLLO_CONFIG_DB_PASSWORD=password \
+      APOLLO_PORTAL_DB_URL=${APOLLO_PORTAL_DB_URL:-jdbc:mysql://localhost:3306/ApolloPortalDB?characterEncoding=utf8} \
+      APOLLO_PORTAL_DB_USERNAME=root \
+      APOLLO_PORTAL_DB_PASSWORD=password
+  ```
+4. docker build -t apollo-standalone:v1.0.0 .  
 
 ### Create a apollo single instance
 
