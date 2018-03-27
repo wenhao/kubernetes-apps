@@ -1,3 +1,6 @@
-### Run a MySQL client to connect to the server:
+### Create a single mysql install
 
-kubectl run -it --rm --image=mysql:5.6 --restart=Never mysql-client -- mysql -h mysql -p password
+1. kubectl create -n <namespace> -f service.yml
+2. kubectl create -n <namespace> -f volume.yml
+3. kubectl create -n <namespace> -f secret.yml
+4. kubectl create -n <namespace> -f deployment.yml
